@@ -23,9 +23,13 @@
 </head> 
 
 <body>	
-
+	
     <article class="resume-wrapper text-center position-relative">
-	    <div class="resume-wrapper-inner mx-auto text-start bg-white shadow-lg">
+		<div class="mb-2">
+			<button class="btn btn-danger" id="btnPDF">Gerar PDF</button>
+		</div>
+		
+	    <div id="geraPDF" class="resume-wrapper-inner mx-auto text-start bg-white shadow-lg">
 		    <header class="resume-header pt-4 pt-md-0">
 			    <div class="row">
 				    <div class="col-block col-md-auto resume-picture-holder text-center text-md-start">
@@ -38,7 +42,7 @@
 							    <div class="title mb-3">Full Stack Developer Junior</div>
 							    <ul class="list-unstyled">
 								    <li class="mb-2"><i class="far fa-envelope fa-fw me-2" data-fa-transform="grow-3"></i>joelson.engcomp@gmail.com</li>
-								    <li class="mb-2"><i class="fas fa-mobile-alt fa-fw me-2" data-fa-transform="grow-6"></i>+351 911800950</li>
+								    <li class="mb-2"><i class="fa-brands fa-whatsapp fa-fw me-2" data-fa-transform="grow-6"></i> <a class="text-link" href="https://api.whatsapp.com/send?phone=+351911800950&text=Ol%C3%A1.%20Bem-vindo" target="_blank">+351 91180-0950</a></li>
 									<li class="mb-2"><i class="fas fa-location-dot fa-fw me-2" data-fa-transform="grow-6"></i>Travessa de Monsanto, 77 
 										3 DTO Frente - 4250295 Porto, Portugal</li>
 							    </ul>
@@ -60,9 +64,13 @@
 			    <section class="resume-section summary-section mb-5">
 				    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Sobre Mim</h2>
 				    <div class="resume-section-content">
-					    <p class="mb-0">Experiência de mais de 3 anos em desenvolvimento web Front-End, principalmente
-							com a linguagem JavaScript, desenvolvendo sites e aplicações. Além de JavaScript tenho habilidades com PHP, HTML, CSS e frameworks VUEJS, VUETIFY e LARAVEL. Sou formado em Engenharia da informática pela UFPA (Universidade Federal do Pará).
-							</p>
+					    <p class="mb-0 text-justify">
+							Sou desenvolvedor front-end, com mais de 3 anos de experiência em desenvolvimento
+							web. Trabalhei em aplicações para atendimento interno e externo, nas quais atuei com
+							PHP, Javascript, Nodejs, MySql, HTML/CSS e Frameworks (Vuejs, Vuetify, Laravel, React e
+							Angular. Sou formado em Engenharia informática pela UFPA (Universidade Federal do
+							Pará)
+						</p>
 				    </div>
 			    </section><!--//summary-section-->
 			    <div class="row">
@@ -71,6 +79,34 @@
 						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Work Experience</h2>
 						    <div class="resume-section-content">
 							    <div class="resume-timeline position-relative">
+									<article class="resume-timeline-item position-relative pb-5">
+									    
+									    <div class="resume-timeline-item-header mb-2">
+										    <div class="d-flex flex-column flex-md-row">
+										        <h3 class="resume-position-title font-weight-bold mb-1">Fullstack Developer Jr</h3>
+										        <div class="resume-company-name ms-auto">Gadoor</div>
+										    </div><!--//row-->
+										    <div class="resume-position-time">06/2022 – Atual – Trofa, Portugal</div>
+									    </div><!--//resume-timeline-item-header-->
+									    <div class="resume-timeline-item-desc">
+										    <p>
+												Na Gadoor estou trabalhando no desenvolvimento de um sistema para gerenciamento
+												de pedidos dos produtos. As tecnologias utilizada framework Laravel, JavaScript, HTML,
+												CSS e MYSQL.
+											</p>
+										    
+										    <h4 class="resume-timeline-item-desc-heading font-weight-bold">Technologies used:</h4>
+										    <ul class="list-inline">
+											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">JavaScript</span></li>
+											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">HTML/CSS</span></li>
+											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">Laravel</span></li>
+											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">Bootstrap</span></li>
+											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">Mysql</span></li>
+										    </ul>
+									    </div><!--//resume-timeline-item-desc-->
+
+								    </article><!--//resume-timeline-item-->
+
 								    <article class="resume-timeline-item position-relative pb-5">
 									    
 									    <div class="resume-timeline-item-header mb-2">
@@ -358,7 +394,33 @@
 	    
     </footer>
 
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+	<script>
+		$(document).ready(function(){
+    $('#btnPDF').click(function() {
+			savePDF(document.querySelector('#geraPDF'));
+			});
+		});
+		
+		function savePDF(codigoHTML) {
+		var doc = new jsPDF('portrait', 'pt', 'a4'),
+			data = new Date();
+		margins = {
+			top: 40,
+			bottom: 60,
+			left: 40,
+			width: 1000
+		};
+		doc.fromHTML(codigoHTML,
+					margins.left, // x coord
+					margins.top, { pagesplit: true },
+					function(dispose){
+			doc.save("Relatorio - "+data.getDate()+"/"+data.getMonth()+"/"+data.getFullYear()+".pdf");
+		});
+		}
+	</script>
 
 </body>
 </html> 
